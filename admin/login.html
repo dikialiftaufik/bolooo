@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo/logo-alt.png" />
+    <!-- Link ke file CSS Bootstrap -->
+    <link href="bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- SweetAlert2 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Background Image */
+      body {
+        background-image: url("../img/hero-section.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        height: 100vh;
+        margin: 0;
+        box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.45);
+      }
+
+      .logo-container {
+        text-align: center;
+        margin-top: -20px;
+        margin-bottom: -120px;
+      }
+
+      .logo-container img {
+        width: 190px;
+        height: auto;
+        padding: 10px;
+      }
+
+      /* Kontainer Login */
+      .login-container {
+        width: auto;
+        height: fit-content;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(2px);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      /* Judul Form Login */
+      .login-container h2 {
+        text-align: center;
+        color: #302c24;
+        margin-bottom: 30px;
+      }
+
+      /* Gaya untuk Logo */
+      .logo {
+        display: block;
+        margin: 0 auto 20px;
+        width: 100px;
+      }
+
+      /* Tombol Login */
+      .login-container .btn-primary {
+        background-color: #4d3835;
+        border-color: #4d3835;
+      }
+
+      /* Tombol Hover untuk Login */
+      .login-container .btn-primary:hover {
+        background-color: #302c24;
+        border-color: #302c24;
+      }
+
+      /* Gaya untuk Input Field */
+      .login-container .form-control {
+        background-color: #dcd1d6;
+        border: 1px solid #564a4b;
+        color: #302c24;
+      }
+
+      .login-container .form-control:focus {
+        border-color: #4d3835;
+        box-shadow: 0 0 5px rgba(77, 56, 53, 0.5);
+      }
+
+      /* Remember Me dan Forgot Password */
+      .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .remember-forgot a {
+        color: #4d3835;
+        text-decoration: none;
+      }
+
+      .remember-forgot a:hover {
+        text-decoration: underline;
+      }
+
+      /* Register Link */
+      .register-link {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .register-link a {
+        color: #4d3835;
+        text-decoration: none;
+      }
+
+      .register-link a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="logo-container">
+      <img src="../img/logo/logo.png" alt="Logo" />
+    </div>
+    <div
+      class="container d-flex align-items-center justify-content-center"
+      style="height: 100vh"
+    >
+      <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Masukkan username"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Masukkan password"
+              required
+            />
+          </div>
+
+          <!-- Remember Me dan Forgot Password -->
+          <div class="remember-forgot">
+            <div>
+              <input type="checkbox" id="rememberMe" />
+              <label for="rememberMe" class="form-check-label"
+                >Remember Me</label
+              >
+            </div>
+            <div>
+              <a href="forgotPass.html">Forgot Password?</a>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <div class="register-link">
+          <p>Belum punya akun? <a href="register.html">Daftar Sekarang</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skrip JS Bootstrap -->
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+
+          if (!username && !password) {
+            Swal.fire({
+              icon: "error",
+              title: "Login Gagal",
+              text: "Username dan Password harus diisi!",
+              confirmButtonColor: "#4d3835",
+            });
+          } else if (!username) {
+            Swal.fire({
+              icon: "error",
+              title: "Login Gagal",
+              text: "Username harus diisi!",
+              confirmButtonColor: "#4d3835",
+            });
+          } else if (!password) {
+            Swal.fire({
+              icon: "error",
+              title: "Login Gagal",
+              text: "Password harus diisi!",
+              confirmButtonColor: "#4d3835",
+            });
+          } else {
+            // Jika validasi berhasil, arahkan ke dashboard
+            Swal.fire({
+              icon: "success",
+              title: "Login Berhasil",
+              text: "Selamat datang!",
+              confirmButtonColor: "#4d3835",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "dashboard.html";
+              }
+            });
+          }
+        });
+    </script>
+  </body>
+</html>
